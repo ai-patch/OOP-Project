@@ -5,11 +5,12 @@ class Player
     private String name;
     private int maxHealth;
     private int health;
+    private int attack;
     private int defense;
     private int staminaPoints;
     private int magicPoints;
 
-    public Player(String name, int maxHealth, int defense, int staminaPoints, int magicPoints)
+    public Player(String name, int maxHealth, int attack, int defense, int staminaPoints, int magicPoints)
     {
         this.name = name;
         this.maxHealth = maxHealth;
@@ -42,6 +43,13 @@ class Player
     public int getMagicPoints()
     {
         return magicPoints;
+    }
+
+    public int dealDamage()
+    {
+        Random random = new Random();
+        int damage = attack + random.nextInt(5);
+        return damage;
     }
 
     public void takeDamage(int damage)
@@ -120,7 +128,12 @@ public class RPGGame
 {
     public static void main(String[] args) 
     {
-        Player player = new Player("Hero", 100, 10, 20, 30);
+        Player player = new Player("Hero", 100, 15, 10, 20, 30);
+
+        Player enemy = new Player("Enemy", 50, 5, 10, 10, 10);
+
+        int damageDealt = player.dealDamage();
+        enemy.takeDamage(damageDealt);
 
         //Damage
         player.takeDamage(15);
@@ -136,5 +149,7 @@ public class RPGGame
 
         //Display Player Stats
         player.displayStats();
+        System.out.println();
+        enemy.displayStats();
     }
 }

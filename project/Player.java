@@ -9,7 +9,7 @@ class Player
     private int defense;
     private int staminaPoints;
     private int magicPoints;
-
+    //Declaring player stat variables
     public Player(String name, int maxHealth, int attack, int defense, int staminaPoints, int magicPoints)
     {
         this.name = name;
@@ -20,6 +20,7 @@ class Player
         this.magicPoints = magicPoints;
     }
 
+    //Getters Start
     public String getName()
     {
         return name;
@@ -30,6 +31,11 @@ class Player
         return health;
     }
 
+    public int getAttack()
+    {
+        return attack;
+    }
+    
     public int getDefense()
     {
         return defense;
@@ -44,7 +50,9 @@ class Player
     {
         return magicPoints;
     }
+    //Getters End
 
+    //Stat change methods start
     public int dealDamage()
     {
         Random random = new Random();
@@ -102,7 +110,7 @@ class Player
     {
         magicPoints += amount;
     }
-
+    
     public void decreaseMagicPoints(int amount)
     {
         magicPoints -= amount;
@@ -111,8 +119,9 @@ class Player
             magicPoints = 0;
         }
     }
+    //Stat change methods end
     
-
+    //Display Stat Method
     public void displayStats() 
     {
         System.out.println("Player Stats:");
@@ -128,9 +137,9 @@ public class RPGGame
 {
     public static void main(String[] args) 
     {
-        Player player = new Player("Hero", 100, 15, 10, 20, 30);
+        Player player = new Player("Hero", 100, 15, 10, 20, 30);     //Example Player Stat
 
-        Player enemy = new Player("Enemy", 50, 5, 10, 10, 10);
+        Player enemy = new Player("Enemy", 50, 5, 10, 10, 10);       //Example Enemy Stat
 
         int damageDealt = player.dealDamage();
         enemy.takeDamage(damageDealt);

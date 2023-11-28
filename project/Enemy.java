@@ -4,7 +4,7 @@ public class Enemy {
     private double enemyHealth = 100;
     private int enemyAttack;
     private int enemyDefense;
-    private String enemyMoves[];
+    private String enemyMoves[] = new String[3];
     private double lightMoveDmg = .5;
     private double mediumMoveDmg = .75;
     private double heavyMoveDmg = 1;
@@ -16,6 +16,8 @@ public class Enemy {
         this.enemyHealth = enemyHealth;
         this.enemyAttack = enemyAttack;
         this.enemyDefense = enemyDefense;
+        this.enemyMoves[0] = enemyMoves[0];
+        this.enemyMoves[1] = enemyMoves[1];
         this.enemyMoves[2] = enemyMoves[2];
     }
 
@@ -105,14 +107,18 @@ public class Enemy {
     public void takeDamage(double rawDamage)
     {
         double damage = rawDamage - (rawDamage*(enemyDefense+(Math.random()*10))/100);
-        enemyHealth = enemyHealth - damage;
+        enemyHealth -= damage;
+        if (enemyHealth < 0) {
+            enemyHealth = 0;
+        }
+        //setHealth(enemyHealth);
     }
 
-    public Boolean isDead()
+    public Boolean isAlive()
     {
         if(enemyHealth>0)
         {
-            return false;
+            return true;
         }
         else
         {

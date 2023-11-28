@@ -1,49 +1,62 @@
-package marika;
 import java.util.Scanner;
 import java.util.Random;
 
 class Traveller
 {
-	public void Classification(String p1)
+	public String name;
+	public void Classification()
 	{
 		Scanner in = new Scanner(System.in);
 		System.out.print("\nHello Traveller!\nEnter your name: ");
-		String name = in.nextLine();
+		name = in.nextLine();
 		System.out.println("Welcome to the dungeon "+ name);
+	}
+	public String getName()
+	{
+		return name;
 	}
 }
 class FirstLevel
 {
-	public void RandomNumber()
-	{
-		Scanner in = new Scanner(System.in);
-		Random r1 = new Random();
-		int randomNumber = r1.nextInt(10) + 1; 
-		int guess;
-		System.out.println("\nThis is the first level. Before you proceed any further, complete this level. ");
-		do 
+	
+		public void RandomNumber()
 		{
+			Scanner in = new Scanner(System.in);
+			Random r1 = new Random();
+			int randomNumber = r1.nextInt(10) + 1; 
+			int guess;
+			int attempts= 5;
+			System.out.println("\nThis is the first level. Before you proceed any further, complete this level. ");
 			
-			System.out.print("\nGuess the number (1-10): ");
-			guess = in.nextInt();
-			if (guess < randomNumber)
+			while (attempts > 0) 
 			{
-				System.out.println("Too low! Try again.");
-			} 
-			else if (guess > randomNumber) 
-			{
-				System.out.println("Too high! Try again.");
-			} 
-			else
-			{
-				System.out.println("\nCongratulations! You guessed the number.");
-				System.out.println("You may proceed to the next level.");
-			}
-			}
-		while (guess != randomNumber);
+	            System.out.print("\nGuess the number (1-10): ");
+	            guess = in.nextInt();
 
-	}
+	            if (guess < randomNumber) 
+	            {
+	                System.out.println("Too low! Try again.");
+	            } 
+	            else if (guess > randomNumber) 
+	            {
+	                System.out.println("Too high! Try again.");
+	            }
+	            else 
+	            {
+	                System.out.println("\nCongratulations! You guessed the number.");
+	                System.out.println("You may proceed to the next level.");
+	                return; // exit the method if the guess is correct
+	            }
+
+	            attempts--;
+	            System.out.println("You have " + attempts + " attempts left.");
+	        }
+
+	        System.out.println("You ran out of attempts. You failed this level.");
+	    }
+		
 }
+
 
 class SecondLevel
 {
@@ -141,135 +154,247 @@ class ThirdLevel
     }
 }
 
-class FourthLevel
+// class FourthLevel
+// 	{
+// 	 public void MonsterFightGame() 
+// 	    {
+// 	        try (Scanner scanner = new Scanner(System.in)) 
+// 	        {
+// 				Random random = new Random();
+
+// 				Player player = new Player(100, 20);
+// 				Monster monster = new Monster(50, 15);
+
+// 				System.out.println("\nThis is the fourth level. Get ready to fight a monster!");
+
+// 				while (player.isAlive() && monster.isAlive()) 
+// 				{
+// 				    printStatsBox("Player Stats", player);
+// 				    printStatsBox("Monster Stats", monster);
+
+// 				    System.out.print("\nWhat do you want to do? (1 - Attack, 2 - Run): ");
+// 				    int choice = scanner.nextInt();
+
+// 				    if (choice == 1) 
+// 				    {
+// 				        playerAttack(player, monster, random);
+// 				    }
+// 				    else if (choice == 2) 
+// 				    {
+// 				        System.out.println("You chose to run away.");
+// 				        break;
+// 				    } 
+// 				    else
+// 				    {
+// 				        System.out.println("Invalid choice. Please choose 1 or 2.");
+// 				    }
+// 				}
+
+// 				if (player.isAlive())
+// 				{
+// 				    System.out.println("\nCongratulations! You defeated the monster and proceed to the next level!");
+// 				} 
+// 				else 
+// 				{
+// 				    System.out.println("\nGame over! The monster was too strong for you.");
+// 				}
+// 				// scanner.close();
+// 			}
+// 	    }
+
+// 	    private static void playerAttack(Player player, Monster monster, Random random)
+// 	    {
+// 	        int playerDamage = random.nextInt(player.getAttack()) + 1;
+// 	        monster.takeDamage(playerDamage);
+// 	        System.out.println("You dealt " + playerDamage + " damage to the monster!");
+
+// 	        int monsterDamage = random.nextInt(monster.getAttack()) + 1;
+// 	        player.takeDamage(monsterDamage);
+// 	        System.out.println("The monster dealt " + monsterDamage + " damage to you!");
+// 	    }
+
+// 	    private static void printStatsBox(String title, Creature creature) 
+// 	    {
+// 	        int boxWidth = 30;
+// 	        System.out.println("+" + "-".repeat(boxWidth - 2) + "+");
+// 	        System.out.println("|" + centerText(title, boxWidth - 2) + "|");
+// 	        System.out.println("|" + "-".repeat(boxWidth - 2) + "|");
+// 	        System.out.println("| Health: " + creature.getHealth() + spaces(boxWidth - 12 - String.valueOf(creature.getHealth()).length()) + "|");
+// 	        System.out.println("| Attack: " + creature.getAttack() + spaces(boxWidth - 12 - String.valueOf(creature.getAttack()).length()) + "|");
+// 	        System.out.println("+" + "-".repeat(boxWidth - 2) + "+");
+// 	    }
+
+	    
+// 	    private static String centerText(String text, int width) {
+// 	        int padding = (width - text.length()) / 2;
+// 	        return spaces(padding) + text + spaces(padding);
+// 	    }
+
+// 	    private static String spaces(int count) 
+// 	    {
+// 	        return " ".repeat(count);
+// 	    }
+
+// 	    private static class Creature 
+// 	    {
+// 	        private int health;
+// 	        private int attack;
+
+// 	        public Creature(int health, int attack)
+// 	        {
+// 	            this.health = health;
+// 	            this.attack = attack;
+// 	        }
+
+// 	        public int getHealth() 
+// 	        {
+// 	            return health;
+// 	        }
+
+// 	        public int getAttack()
+// 	        {
+// 	            return attack;
+// 	        }
+
+// 	        public void takeDamage(int damage) 
+// 	        {
+// 	            health = Math.max(0, health - damage);
+// 	        }
+
+// 	        public boolean isAlive() 
+// 	        {
+// 	            return health > 0;
+// 	        }
+// 	    }
+
+// 	    private static class Player extends Creature 
+// 	    {
+// 	        public Player(int health, int attack) 
+// 	        {
+// 	            super(health, attack);
+// 	        }
+// 	    }
+
+// 	    private static class Monster extends Creature
+// 	    {
+// 	        public Monster(int health, int attack) 
+// 	        {
+// 	            super(health, attack);
+// 	        }
+// 	    }
+	    
+	    
+// 	}
+
+class FifthLevel
+{
+	public void MonsterFightGame()
 	{
-	    public void MonsterFightGame() 
-	    {
-	        Scanner scanner = new Scanner(System.in);
-	        Random random = new Random();
+	Scanner sc = new Scanner(System.in);
+	Random random = new Random();
+	Player player = new Player("Hero", 100, 25, 15, 50);
+	String bossMoves[] = new String[]{"Icicle spear!", "Blizzard!!", "Frostburn Nova!!!"};
+	Enemy Boss = new Enemy("Minister Blizzard", 100, 15, 5, bossMoves);
+	int attackOrder[] = {0,0,2,0,1,1,0,0,1,0};
+	int attackCounter = 0;
 
-	        Player player = new Player(100, 20);
-	        Monster monster = new Monster(50, 15);
+	String bossIntro = "As the chilling winds howl and frost encases the battleground, a figure emerges from the blizzard's heart.\r\n"
+						+ "Minister Blizzard, a towering colossus draped in robes of ice, commands the frozen tempests at will.\r\n"
+						+ "Glacial spikes jut from his shoulders, crackling with elemental power, while his eyes gleam like frozen sapphires, filled with an ancient malevolence.\r\n"
+						+ "With each step, the ground freezes, and the air thickens with an icy aura, heralding a formidable battle against this tyrant of frost and snow.\n" ;
+	for(int i = 0; i < bossIntro.length(); i++)
+	{
+	    System.out.printf("%c", bossIntro.charAt(i));
+	    try{
+	        Thread.sleep(2);//0.5s pause between characters
+	    }catch(InterruptedException ex){
+	        Thread.currentThread().interrupt();
+	    }
+	}
 
-	        System.out.println("\nThis is the fourth level. Get ready to fight a monster!");
-
-	        while (player.isAlive() && monster.isAlive()) 
+	System.out.println("You enter into a fight for your very life!!!");
+	while (player.getHealth()>0 && Boss.isAlive()) 
 	        {
-	            System.out.println("\nPlayer Stats - Health: " + player.getHealth() + ", Attack: " + player.getAttack());
-	            System.out.println("Monster Stats - Health: " + monster.getHealth() + ", Attack: " + monster.getAttack());
+	            System.out.println("\nPlayer Stats - Name: " + player.getName() + ", Health: " + player.getHealth());
+	            System.out.println("Monster Stats - Name: " + Boss.getName() + ", Health: " + Boss.getHealth());
 
-	            System.out.print("\nWhat do you want to do? (1 - Attack, 2 - Run): ");
-	            int choice = scanner.nextInt();
+	            System.out.println("\nWhat do you want to do?");
+				System.out.println("1 - Attack, 2 - Heal, 3 - Display Player Stats, 4 - Display Enemy Stats");
+	            int choice = sc.nextInt();
 
 	            if (choice == 1) 
 	            {
-	                // Player attacks the monster
-	                int playerDamage = random.nextInt(player.getAttack()) + 1;
-	                monster.takeDamage(playerDamage);
-	                System.out.println("You dealt " + playerDamage + " damage to the monster!");
+					System.out.println("Please choose type of attack - ");
+					System.out.println("1 - Light Attack, 2 - Medium Attack");
+					System.out.println("3 - Heavy Attack, 4 - Magic Attack");
+					int attackSelect = sc.nextInt();
+					do
+					{
+						switch (attackSelect) 
+						{
+							case 1:
+								System.out.println(player.getDamage(1));
+								//System.out.println(Boss.takeDamage(player.getDamage(0)););
+								Boss.takeDamage(player.getDamage(1));
+								break;
+							case 2:
+							System.out.println(player.getDamage(2));
+								Boss.takeDamage(player.getDamage(2));
+								break;
+							case 3:
+							System.out.println(player.getDamage(3));
+								Boss.takeDamage(player.getDamage(3));
+								break;
+							case 4:
+							System.out.println(player.getDamage(4));
+								Boss.takeDamage(player.getDamage(4));
+								player.decreaseMagicPoints(20);
+								break;
+							default:
+								System.out.println("Please enter a valid value");		
+								break;
+						}		
+					} while (attackSelect<1 || attackSelect>4);		
 
-	                // Monster attacks the player
-	                int monsterDamage = random.nextInt(monster.getAttack()) + 1;
-	                player.takeDamage(monsterDamage);
-	                System.out.println("The monster dealt " + monsterDamage + " damage to you!");
+					System.out.println("The monster lets out a mighty roar and uses " + bossMoves[attackOrder[attackCounter]]);
+					player.takeDamage((int)Boss.getDamage(attackCounter++));
 	            } 
 	            else if (choice == 2) 
 	            {
-	                // Player chooses to run
-	                System.out.println("You chose to run away. Game over!");
-	                break;
+					int healValue = random.nextInt(20 - 7) + 7;
+	                // Player chooses to heal
+	                System.out.println("A majestic light fills you from within, you heal " + healValue);
+					player.heal(healValue);  
+					// Boss attacks
+					System.out.println("The monster lets out a mighty roar and uses " + bossMoves[attackCounter]);
+					player.takeDamage((int)Boss.getDamage(attackCounter++));              
 	            } 
-	            else 
+	            else if (choice == 3)
 	            {
-	                System.out.println("Invalid choice. Please choose 1 or 2.");
+	                player.displayStats();
 	            }
+				else if (choice == 4)
+				{
+					Boss.displayStats();
+				}
+				else 
+				{
+					System.out.println("Please choose a valid option between 1 - 4");
+				}
 	        }
 
-	        if (player.isAlive())
+	        if (player.getHealth()>0)
 	        {
-	            System.out.println("\nCongratulations! You defeated the monster and proceed to the next level!");
+	            System.out.println("\nCongratulations! The boss is defeated, you win the game!!!!");
 	        } 
 	        else 
 	        {
 	            System.out.println("\nGame over! The monster was too strong for you.");
 	        }
-
-	        //scanner.close();
-	    }
-
-	    private static class Player 
-	    {
-	        private int health;
-	        private int attack;
-
-	        public Player(int health, int attack)
-	        {
-	            this.health = health;
-	            this.attack = attack;
-	        }
-
-	        public int getHealth() 
-	        {
-	            return health;
-	        }
-
-	        public int getAttack() 
-	        {
-	            return attack;
-	        }
-
-	        public void takeDamage(int damage) 
-	        {
-	            health -= damage;
-	            if (health < 0)
-	            {
-	                health = 0;
-	            }
-	        }
-
-	        public boolean isAlive() 
-	        {
-	            return health > 0;
-	        }
-	    }
-
-	    private static class Monster 
-	    {
-	        private int health;
-	        private int attack;
-
-	        public Monster(int health, int attack) 
-	        {
-	            this.health = health;
-	            this.attack = attack;
-	        }
-
-	        public int getHealth()
-	        {
-	            return health;
-	        }
-
-	        public int getAttack() 
-	        {
-	            return attack;
-	        }
-
-	        public void takeDamage(int damage) 
-	        {
-	            health -= damage;
-	            if (health < 0)
-	            {
-	                health = 0;
-	            }
-	        }
-
-	        public boolean isAlive()
-	        {
-	            return health > 0;
-	        }
-	    }
+	
+	sc.close();
 	}
-
+}
 
 
 public class Main 
@@ -288,15 +413,18 @@ public class Main
         System.out.println(art);  // Print the ASCII art
         
         Traveller p1 = new Traveller();
-        p1.Classification(null);
+        p1.Classification();
         FirstLevel level1 = new FirstLevel();
         level1.RandomNumber();
         SecondLevel level2 = new SecondLevel();
         level2.GuessTheWord();
         ThirdLevel level3 = new ThirdLevel();
         level3.DiceRollingGame();
-        FourthLevel level4 = new FourthLevel();
-        level4.MonsterFightGame();
-    }
+        // FourthLevel level4 = new FourthLevel();
+        // level4.MonsterFightGame();
+		FifthLevel level5 = new FifthLevel();
+		level5.MonsterFightGame();
+	}
 }
+
 

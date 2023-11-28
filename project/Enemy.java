@@ -1,3 +1,5 @@
+package game;
+
 public class Enemy {
 
     private String enemyName;
@@ -122,7 +124,7 @@ public class Enemy {
         }
         else
         {
-            return true;
+            return false;
         }
     }
 

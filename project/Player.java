@@ -1,4 +1,4 @@
-import java.util.Random;
+package game;
 
 class Player {
         private String name;
@@ -21,6 +21,7 @@ class Player {
             this.health = maxHealth;
             this.defense = defense;
             this.magicPoints = magicPoints;
+            this.attack = attack;
         }
 
         // Getters Start
@@ -37,32 +38,29 @@ class Player {
         }
 
         public double getDamage(int moveNum) {
-            double damage = 0;
+            double playerDamage = 0;
             switch (moveNum) {
                 case 1:
-                    damage = attack * lightMoveDmg;
+                    playerDamage = attack * lightMoveDmg;
                     break;
                 case 2:
-                    damage = attack * mediumMoveDmg;
+                    playerDamage = attack * mediumMoveDmg;
                     break;
                 case 3:
-                    damage = attack * heavyMoveDmg;
+                    playerDamage = attack * heavyMoveDmg;
                     break;
                 case 4:
-                    damage = attack * magicMoveDmg;
+                    playerDamage = attack * magicMoveDmg;
+                    break;
                 default:
                     System.out.println("Move no. out of bounds");
                     break;
                 }
-                return damage;
+                return playerDamage;
         }
 
         public int getDefense() {
             return defense;
-        }
-
-        public int getstaminaPoints() {
-            return staminaPoints;
         }
 
         public int getMagicPoints() {
@@ -71,12 +69,6 @@ class Player {
         // Getters End
 
         // Stat change methods start
-        public int dealDamage() {
-            Random random = new Random();
-            int damage = attack + random.nextInt(5);
-            return damage;
-        }
-
         public void takeDamage(int damage) {
             double netdamage = damage - (damage * (defense + (Math.random() * 10)) / 100);
             health -= netdamage;
